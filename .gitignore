@@ -1,0 +1,49 @@
+# .NET
+**/bin/
+**/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# VS Code / JetBrains
+.vscode/
+.idea/
+
+# Tests
+TestResults/
+*.trx
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+crash.log
+crash.*.log
+
+# Terraform local lab files
+terraform/patch.json
+
+# Terraform overrides
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Temporary files
+*.tmp
+*.temp
+
+# Kubernetes local secrets
+k8s/secret.yaml
+k8s/postgres-secret.yaml

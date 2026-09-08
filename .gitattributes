@@ -1,0 +1,16 @@
+# Normaliza arquivos texto no Git
+* text=auto
+
+# DevOps / Linux-oriented files
+*.tf       text eol=lf
+*.tfvars   text eol=lf
+*.yml      text eol=lf
+*.yaml     text eol=lf
+*.sh       text eol=lf
+Dockerfile text eol=lf
+.dockerignore text eol=lf
+
+# Windows scripts
+*.ps1      text eol=crlf
+*.bat      text eol=crlf
+*.cmd      text eol=crlf

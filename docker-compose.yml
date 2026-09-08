@@ -1,0 +1,65 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    platform: linux/amd64
+    container_name: devops-catalog-postgres
+
+    environment:
+      POSTGRES_DB: devopscatalog
+      POSTGRES_USER: devopscatalog
+      POSTGRES_PASSWORD: devopscatalog
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - devops-catalog-postgres-data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U devopscatalog -d devopscatalog"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    container_name: devops-catalog-redis
+
+    ports:
+      - "6380:6379"
+
+    volumes:
+      - devops-catalog-redis-data:/data
+
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    image: devops-catalog-api:1.0.0
+    
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: devops-catalog-api
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=devopscatalog;Username=devopscatalog;Password=devopscatalog"
+      ConnectionStrings__Redis: "redis:6379"
+
+    ports:
+      - "5080:8080"
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  devops-catalog-postgres-data:
+  devops-catalog-redis-data:

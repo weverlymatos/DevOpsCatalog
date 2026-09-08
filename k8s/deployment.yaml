@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: devops-catalog-api
+  namespace: devops-catalog
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: devops-catalog-api
+
+  template:
+    metadata:
+      labels:
+        app: devops-catalog-api
+
+    spec:
+      containers:
+        - name: api
+          image: devops-catalog-api:1.1.0
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8080
+
+          envFrom:
+            - configMapRef:
+                name: devops-catalog-config
+
+            - secretRef:
+                name: devops-catalog-secret
+
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20

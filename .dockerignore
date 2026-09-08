@@ -1,0 +1,33 @@
+# .NET build outputs
+**/bin
+**/obj
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vs
+.vscode
+.idea
+*.user
+*.suo
+
+# Tests
+TestResults
+*.trx
+
+# Logs
+*.log
+
+# DevOps files not needed to build the API
+terraform
+k8s
+.github
+
+# Docker Compose isn't needed inside the image
+docker-compose.yml
+
+# Documentation / temporary files
+*.md
+*.tmp

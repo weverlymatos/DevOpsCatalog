@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: devops-catalog-redis
+  namespace: devops-catalog
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: devops-catalog-redis
+
+  template:
+    metadata:
+      labels:
+        app: devops-catalog-redis
+
+    spec:
+      containers:
+        - name: redis
+          image: redis:7
+
+          ports:
+            - containerPort: 6379
+
+          readinessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 3
+            periodSeconds: 5
+
+          livenessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 10
+            periodSeconds: 10

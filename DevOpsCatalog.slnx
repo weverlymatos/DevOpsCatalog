@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Itens de Solução/">
+    <File Path="docker-compose.yml" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/DevOpsCatalog.Api/DevOpsCatalog.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/DevOpsCatalog.Tests/DevOpsCatalog.Tests.csproj" />
+  </Folder>
+</Solution>

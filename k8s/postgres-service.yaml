@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: devops-catalog-postgres
+  namespace: devops-catalog
+
+spec:
+  clusterIP: None
+
+  selector:
+    app: devops-catalog-postgres
+
+  ports:
+    - port: 5432
+      targetPort: 5432

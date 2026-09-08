@@ -38,7 +38,7 @@ services:
       retries: 10
 
   api:
-    image: devops-catalog-api:1.0.0
+    image: devops-catalog-api:1.1.0
     
     build:
       context: .
